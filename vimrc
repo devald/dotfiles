@@ -86,6 +86,11 @@ if has('persistent_undo')
   set undodir=~/.config/vim/tmp/undo/
 endif
 
+" Remember last position in file
+if has("autocmd")
+  au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+endif
+
 " Colorscheme
 syntax enable
 set t_Co=256

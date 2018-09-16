@@ -23,10 +23,10 @@ Plug 'Yggdroot/indentLine'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'jiangmiao/auto-pairs'
 Plug 'flazz/vim-colorschemes'
-Plug 'sheerun/vim-polyglot'
 Plug 'hashivim/vim-terraform'
 Plug 'mattn/emmet-vim'
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
+Plug 'sheerun/vim-polyglot'
 call plug#end()
 
 if &shell =~# 'fish$'

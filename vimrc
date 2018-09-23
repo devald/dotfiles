@@ -251,15 +251,16 @@ let g:tagbar_left = 1
 let g:tagbar_autoclose = 1
 
 " Shougo/deoplete.nvim
-" Use deoplete
-let g:deoplete#enable_at_startup = 1
+" Enable deoplete when InsertEnter
+let g:deoplete#enable_at_startup = 0
+autocmd InsertEnter * call deoplete#enable()
 " disable before multiple-cursors
-function! Multiple_cursors_before()
-  let b:deoplete_disable_auto_complete = 1
+function g:Multiple_cursors_before()
+  call deoplete#custom#buffer_option('auto_complete', v:false)
 endfunction
 " enable after multiple-cursors
-function! Multiple_cursors_after()
-  let b:deoplete_disable_auto_complete = 0
+function g:Multiple_cursors_after()
+  call deoplete#custom#buffer_option('auto_complete', v:true)
 endfunction
 
 " mattn/emmet-vim

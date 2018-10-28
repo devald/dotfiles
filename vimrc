@@ -5,7 +5,6 @@ Plug 'Shougo/deoplete.nvim'
 Plug 'zchee/deoplete-go', { 'do': 'make'}
 Plug 'roxma/nvim-yarp'
 Plug 'roxma/vim-hug-neovim-rpc'
-Plug 'mileszs/ack.vim'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tommcdo/vim-fubitive'
@@ -152,9 +151,6 @@ let g:terraform_align=1
 let g:terraform_fold_sections=1
 let g:terraform_remap_spacebar=1
 autocmd FileType terraform setlocal commentstring=#%s
-
-" mileszs/ack.vim
-let g:ackprg='ag --vimgrep'
 
 " fatih/vim-go
 " Jump to next error with Ctrl-n and previous error with Ctrl-m.

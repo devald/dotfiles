@@ -1,7 +1,7 @@
 call plug#begin()
 Plug 'scrooloose/nerdtree'
 Plug 'majutsushi/tagbar'
-Plug 'Shougo/deoplete.nvim'
+Plug 'Shougo/deoplete.nvim', { 'tag': '4.1' }
 Plug 'zchee/deoplete-go', { 'do': 'make'}
 Plug 'roxma/nvim-yarp'
 Plug 'roxma/vim-hug-neovim-rpc'
@@ -137,10 +137,10 @@ let g:tmuxline_preset={
       \'b'    : '',
       \'c'    : '',
       \'win'  : ['#I', '#W'],
-      \'cwin' : ['#I', '#W'],
+      \'cwin' : ['#I', '#W', '#F'],
       \'x'    : '',
-      \'y'    : '%R',
-      \'z'    : '#(dig +short myip.opendns.com @resolver1.opendns.com)'}
+      \'y'    : ['%A', '%R', '#(dig +short myip.opendns.com @resolver1.opendns.com)'],
+      \'z'    : ''}
 
 " Yggdroot/indentLine
 let g:indentLine_enabled=1

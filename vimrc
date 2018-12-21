@@ -150,7 +150,6 @@ let g:terraform_fmt_on_save=1
 let g:terraform_align=1
 let g:terraform_fold_sections=1
 let g:terraform_remap_spacebar=1
-autocmd FileType terraform setlocal commentstring=#%s
 
 " fatih/vim-go
 " Jump to next error with Ctrl-n and previous error with Ctrl-m.
@@ -234,9 +233,6 @@ map <leader>m :NERDTreeToggle<CR>
 let NERDTreeQuitOnOpen=1
 " open on the right side
 let g:NERDTreeWinPos = "right"
-" open a NERDTree automatically when vim starts up if no files were specified
-" autocmd StdinReadPre * let s:std_in=1
-" autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 " close vim if the only window left open is a NERDTree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 

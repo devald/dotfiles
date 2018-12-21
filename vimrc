@@ -139,7 +139,7 @@ let g:tmuxline_preset={
       \'win'  : ['#I', '#W'],
       \'cwin' : ['#I', '#W', '#F'],
       \'x'    : '',
-      \'y'    : ['%A', '%R', '#(dig +short myip.opendns.com @resolver1.opendns.com)'],
+      \'y'    : ['%A', '%R', '#(dig +short myip.opendns.com @resolver3.opendns.com)'],
       \'z'    : ''}
 
 " Yggdroot/indentLine

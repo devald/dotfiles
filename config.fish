@@ -3,7 +3,6 @@ set fish_greeting ""
 if test -z $TMUX
   set -gx PATH /usr/local/opt/findutils/libexec/gnubin \
                /usr/local/opt/gnu-sed/libexec/gnubin \
-               /usr/local/opt/mongodb@3.6/bin \
                /usr/local/sbin \
                (go env GOPATH)/bin \
                $PATH

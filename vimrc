@@ -28,10 +28,6 @@ Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 Plug 'sheerun/vim-polyglot'
 call plug#end()
 
-if &shell =~# 'fish$'
-  set shell=/bin/sh
-endif
-
 """"""""""""""""""""""
 "      Settings      "
 """"""""""""""""""""""

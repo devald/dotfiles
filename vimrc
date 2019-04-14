@@ -24,7 +24,7 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'flazz/vim-colorschemes'
 Plug 'hashivim/vim-terraform'
 Plug 'mattn/emmet-vim'
-Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'sheerun/vim-polyglot'
 Plug 'ryanoasis/vim-devicons'
 call plug#end()

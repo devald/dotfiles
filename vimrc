@@ -1,8 +1,8 @@
 call plug#begin()
 Plug 'scrooloose/nerdtree'
 Plug 'majutsushi/tagbar'
-Plug 'Shougo/deoplete.nvim', { 'tag': '4.1' }
-Plug 'zchee/deoplete-go', { 'do': 'make'}
+Plug 'Shougo/deoplete.nvim', { 'tag': '5.0' }
+Plug 'deoplete-plugins/deoplete-go', { 'do': 'make' }
 Plug 'roxma/nvim-yarp'
 Plug 'roxma/vim-hug-neovim-rpc'
 Plug 'tpope/vim-commentary'

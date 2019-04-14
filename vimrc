@@ -78,6 +78,7 @@ set nocursorcolumn              " Do not highlight column (speeds up highlightin
 set cursorline                  " Highlight cursor
 set lazyredraw                  " Wait to redraw
 set clipboard=unnamed           " Accessing the system clipboard from Vim
+set updatetime=100              " Reduce updatetime for vim-gitgutter
 " Disable automatic comment insertion
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 

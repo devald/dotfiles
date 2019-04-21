@@ -171,8 +171,8 @@ let g:go_highlight_generate_tags = 1
 let g:go_auto_sameids = 1
 
 " Open :GoDeclsDir with ctrl-g
-nmap <C-g> :GoDeclsDir<cr>
-imap <C-g> <esc>:<C-u>GoDeclsDir<cr>
+nmap <C-g> :GoDeclsDir<CR>
+imap <C-g> <esc>:<C-u>GoDeclsDir<CR>
 
 augroup go
   autocmd!

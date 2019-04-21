@@ -150,10 +150,10 @@ let g:terraform_fold_sections=1
 let g:terraform_remap_spacebar=1
 
 " fatih/vim-go
-" Jump to next error with Ctrl-n and previous error with Ctrl-m.
+" Jump to next error with up and previous error with down arrow key.
 " Close the quickfix window with <leader>a
-map <C-n> :cnext<CR>
-map <C-m> :cprevious<CR>
+nnoremap <down> :cnext<CR>
+nnoremap <up> :cprevious<CR>
 nnoremap <leader>a :cclose<CR>
 
 let g:go_fmt_command = "goimports"

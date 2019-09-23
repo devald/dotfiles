@@ -1,13 +1,7 @@
 call plug#begin()
 Plug 'scrooloose/nerdtree'
-Plug 'majutsushi/tagbar'
-Plug 'Shougo/deoplete.nvim', { 'tag': '5.0' }
-Plug 'deoplete-plugins/deoplete-go', { 'do': 'make' }
-Plug 'roxma/nvim-yarp'
-Plug 'roxma/vim-hug-neovim-rpc'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
-Plug 'tommcdo/vim-fubitive'
 Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-surround'
 Plug 'airblade/vim-gitgutter'
@@ -21,80 +15,77 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'Yggdroot/indentLine'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'jiangmiao/auto-pairs'
-Plug 'flazz/vim-colorschemes'
 Plug 'hashivim/vim-terraform'
 Plug 'mattn/emmet-vim'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'sheerun/vim-polyglot'
 Plug 'ryanoasis/vim-devicons'
+Plug 'neoclide/coc.nvim', { 'branch': 'release' }
+Plug 'mhinz/vim-startify'
+Plug 'roxma/vim-tmux-clipboard'
+Plug 'vim-scripts/BufOnly.vim'
+Plug 'ayu-theme/ayu-vim'
+Plug 'sonph/onehalf', { 'rtp': 'vim' }
 call plug#end()
 
 """"""""""""""""""""""
 "      Settings      "
 """"""""""""""""""""""
 
-filetype off                    " Reset filetype detection first ...
-filetype plugin indent on       " ... and enable filetype detection
 retab                           " Change all existing tab characters to spaces
 set expandtab                   " Converting tabs to spaces
 set tabstop=2                   " Insert 2 spaces for a tab
 set shiftwidth=2                " Indent 2 columns in normal or visual mode
-" set list                        " Reveal hidden characters
 set listchars=tab:▸\ ,eol:¬     " Customise invisible characters
-set nocompatible                " Enables us Vim specific features
-set ttyfast                     " Indicate fast terminal conn for faster redraw
-set ttymouse=xterm2             " Indicate terminal type for mouse codes
-set ttyscroll=3                 " Speedup scrolling
 set scrolloff=10                " Five lines visible above and below the cursor
 set mouse=a                     " Scroll with mouse
-set laststatus=2                " Show status line always
-set encoding=utf-8              " Set default encoding to UTF-8
-set autoread                    " Automatically read changed files
-set autoindent                  " Enable Autoindent
-set backspace=indent,eol,start  " Makes backspace key more powerful.
-set incsearch                   " Shows the match while typing
-set hlsearch                    " Highlight found searches
-set noerrorbells                " No beeps
 set number                      " Show line numbers
-set showcmd                     " Show me what I'm typing
 set noswapfile                  " Don't use swapfile
-set nobackup                    " Don't create annoying backup files
 set splitright                  " Vertical windows should be split to right
 set splitbelow                  " Horizontal windows should split to bottom
 set autowrite                   " Automatically save before :next, :make etc.
 set hidden                      " Buffer should still exist if window is closed
 set fileformats=unix,dos,mac    " Prefer Unix over Windows over OS 9 formats
-set noshowmatch                 " Do not show matching brackets by flickering
 set noshowmode                  " We show the mode with airline or lightline
 set ignorecase                  " Search case insensitive...
 set smartcase                   " ... but not it begins with upper case
-set completeopt=menu,menuone    " Show popup menu, even if there is one entry
 set pumheight=10                " Completion window max size
 set colorcolumn=81              " show 80 columns limit
-set nocursorcolumn              " Do not highlight column (speeds up highlighting)
 set cursorline                  " Highlight cursor
 set lazyredraw                  " Wait to redraw
 set clipboard=unnamed           " Accessing the system clipboard from Vim
 set updatetime=100              " Reduce updatetime for vim-gitgutter
+set shell=/usr/local/bin/fish   " Fish as default shell
+set undofile                    " This enables us to undo files even if you exit Vim.
+
 " Disable automatic comment insertion
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
-" This enables us to undo files even if you exit Vim.
-if has('persistent_undo')
-  set undofile
-  set undodir=~/.config/vim/tmp/undo/
-endif
+" Change cursor shape in different modes
+let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+let &t_SR = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=2\x7\<Esc>\\"
+let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+
+" TrueColor
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+set termguicolors
 
 " Remember last position in file
-if has("autocmd")
-  au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
-endif
+autocmd BufReadPost *
+  \ if line("'\"") >= 1 && line("'\"") <= line("$") && &ft !~# 'commit'
+  \ |   exe "normal! g`\""
+  \ | endif
 
 " Colorscheme
 syntax enable
-set t_Co=256
-set background=dark
-colorscheme molokai
+let ayucolor="mirage"
+try
+  colorscheme ayu
+  " colorscheme onehalfdark
+catch /^Vim\%((\a\+)\)\=:E185/
+  colorscheme default
+endtry
 
 """"""""""""""""""""""
 "      Mappings      "
@@ -102,6 +93,9 @@ colorscheme molokai
 
 " Set leader shortcut to a comma ','. By default it's the backslash
 let mapleader = ","
+
+" Exit on j
+imap jj <Esc>
 
 " disable arrow keys
 nnoremap <up>    <nop>
@@ -112,44 +106,60 @@ inoremap <up>    <nop>
 inoremap <down>  <nop>
 inoremap <left>  <nop>
 inoremap <right> <nop>
-" cycling through listed buffers
-nnoremap <Tab>   :bnext<CR>
-nnoremap <S-Tab> :bprevious<CR>
+
 " Shortcut to rapidly toggle `set list`
 nnoremap <leader>h :set list!<CR>
 
+" Automatically resize screens to be equally the same
+autocmd VimResized * wincmd =
+
+" Fast saving
+nnoremap <leader>w :w!<cr>
+nnoremap <silent> <leader>q :q!<CR>
+
+"""""""""""""""""""""
+"      Plugins      "
+"""""""""""""""""""""
+
 " vim-airline/vim-airline
+
 " smarter tab line
 let g:airline#extensions#tabline#enabled=1
 " powerline fonts
-let g:airline_powerline_fonts=1
+let g:airline_powerline_fonts=0
 " theme
-let g:airline_theme='wombat'
+let g:airline_theme='ayu_mirage'
 
 " edkolev/tmuxline.vim
+
 " powerline separators
-let g:tmuxline_powerline_separators=1
+let g:tmuxline_powerline_separators=0
 " custom preset
 let g:tmuxline_preset={
-      \'a'    : '#S',
-      \'b'    : '',
-      \'c'    : '',
-      \'win'  : ['#I', '#W'],
-      \'cwin' : ['#I', '#W', '#F'],
-      \'x'    : '',
-      \'y'    : ['%A', '%R', '#(dig +short myip.opendns.com @resolver3.opendns.com)'],
-      \'z'    : ''}
+    \ 'a'      : '#S',
+    \ 'b'      : '',
+    \ 'c'      : '',
+    \ 'win'    : '#I',
+    \ 'cwin'   : '#I \uF120',
+    \ 'x'      : '',
+    \ 'y'      : '#(dig +short myip.opendns.com @resolver3.opendns.com)',
+    \ 'z'      : '\uF662  #(kubectl config current-context)',
+    \ 'options': {'status-justify': 'left'}
+    \ }
 
 " Yggdroot/indentLine
+
 let g:indentLine_enabled=1
 
 " hashivim/vim-terraform
+
 let g:terraform_fmt_on_save=1
 let g:terraform_align=1
 let g:terraform_fold_sections=1
 let g:terraform_remap_spacebar=1
 
 " fatih/vim-go
+
 " Jump to next error with up and previous error with down arrow key.
 " Close the quickfix window with <leader>a
 nnoremap <down> :cnext<CR>
@@ -178,7 +188,7 @@ augroup go
   autocmd!
 
   " Show by default 4 spaces for a tab
-  autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4
+  autocmd FileType go setlocal noexpandtab tabstop=4 shiftwidth=4
 
   " :GoBuild and :GoTestCompile
   autocmd FileType go nmap <leader>b :<C-u>call <SID>build_go_files()<CR>
@@ -225,75 +235,99 @@ function! s:build_go_files()
 endfunction
 
 " scrooloose/nerdtree
+
 " open it
 map <leader>m :NERDTreeToggle<CR>
 " automatically close NerdTree when you open a file
 let NERDTreeQuitOnOpen=1
+" show hidden files
+let NERDTreeShowHidden=1
+" delete buffer without confimation
+let NERDTreeAutoDeleteBuffer=1
 " open on the right side
 let g:NERDTreeWinPos = "right"
 " close vim if the only window left open is a NERDTree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
-" majutsushi/tagbar
-" open it
-map <leader>n :TagbarToggle<CR>
-" open on the left side
-let g:tagbar_left = 1
-" automatically close Tagbar when you open a file
-let g:tagbar_autoclose = 1
-" Go configuration for Tagbar
-let g:tagbar_type_go = {
-  \ 'ctagstype' : 'go',
-  \ 'kinds'     : [
-    \ 'p:package',
-    \ 'i:imports:1',
-    \ 'c:constants',
-    \ 'v:variables',
-    \ 't:types',
-    \ 'n:interfaces',
-    \ 'w:fields',
-    \ 'e:embedded',
-    \ 'm:methods',
-    \ 'r:constructor',
-    \ 'f:functions'
-  \ ],
-  \ 'sro' : '.',
-  \ 'kind2scope' : {
-    \ 't' : 'ctype',
-    \ 'n' : 'ntype'
-  \ },
-  \ 'scope2kind' : {
-    \ 'ctype' : 't',
-    \ 'ntype' : 'n'
-  \ },
-  \ 'ctagsbin'  : 'gotags',
-  \ 'ctagsargs' : '-sort -silent'
-\ }
-
-" Shougo/deoplete.nvim
-" Enable deoplete when InsertEnter
-let g:deoplete#enable_at_startup = 0
-autocmd InsertEnter * call deoplete#enable()
-" disable before multiple-cursors
-function g:Multiple_cursors_before()
-  call deoplete#custom#buffer_option('auto_complete', v:false)
-endfunction
-" enable after multiple-cursors
-function g:Multiple_cursors_after()
-  call deoplete#custom#buffer_option('auto_complete', v:true)
-endfunction
-
 " mattn/emmet-vim
+
 " redefine trigger key
 let g:user_emmet_leader_key='<C-e>'
 
-" Change cursor shape in different modes
-let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
-let &t_SR = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=2\x7\<Esc>\\"
-let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+" mhinz/vim-startify
+
+" show vim-devicons
+function! StartifyEntryFormat()
+  return 'WebDevIconsGetFileTypeSymbol(absolute_path) ." ". entry_path'
+endfunction
+" bookmark vim, tmux, fish configs
+let g:startify_bookmarks = [
+  \ {'c': '~/git/Private/dotfiles/vimrc'}
+  \ ]
+" unicode characters for fortune header frame
+let g:startify_fortune_use_unicode = 1
+" change to the root directory of the VCS
+let g:startify_change_to_vcs_root = 1
+" update files on-the-fly
+let g:startify_update_oldfiles = 1
+" fast access for the plugin manager
+let g:startify_commands = [
+  \ {'m': ['update plugin manager', ':PlugUpgrade' ] },
+  \ {'p': ['update plugins', ':PlugUpdate' ] },
+  \ ]
+" update session automatically
+let g:startify_session_persistence = 1
+" custom list on startup screen
+let g:startify_lists = [
+  \ { 'type': 'files',     'header': ['   MRU']       },
+  \ { 'type': 'sessions',  'header': ['   Sessions']  },
+  \ { 'type': 'bookmarks', 'header': ['   Bookmarks'] },
+  \ { 'type': 'commands',  'header': ['   Commands']  },
+  \ ]
+
+" airblade/vim-gitgutter
+
+" disable focus reports
+let g:gitgutter_terminal_reports_focus = 0
 
 " junegunn/fzf.vim
+
 " CtrlP key binding
 nmap <C-p> :Files<CR>
 " Buffer key binding
 nmap ; :Buffers<CR>
+" default layout
+" Reverse the layout to make the FZF list top-down
+let $FZF_DEFAULT_OPTS='--layout=reverse'
+" Using the custom window creation function
+let g:fzf_layout = { 'window': 'call FloatingFZF()' }
+" Function to create the custom floating window
+function! FloatingFZF()
+  " creates a scratch, unlisted, new, empty, unnamed buffer
+  " to be used in the floating window
+  let buf = nvim_create_buf(v:false, v:true)
+  " 90% of the height
+  let height = float2nr(&lines * 0.9)
+  " 60% of the height
+  let width = float2nr(&columns * 0.6)
+  " horizontal position (centralized)
+  let horizontal = float2nr((&columns - width) / 2)
+  " vertical position (one line down of the top)
+  let vertical = 1
+  let opts = {
+        \ 'relative': 'editor',
+        \ 'row': vertical,
+        \ 'col': horizontal,
+        \ 'width': width,
+        \ 'height': height
+        \ }
+  " open the new window, floating, and enter to it
+  call nvim_open_win(buf, v:true, opts)
+endfunction
+" search with preview
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
+  \   <bang>0 ? fzf#vim#with_preview('up:60%')
+  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \   <bang>0)

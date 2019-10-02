@@ -78,7 +78,6 @@ autocmd BufReadPost *
   \ | endif
 
 " Colorscheme
-syntax enable
 let ayucolor="mirage"
 try
   colorscheme ayu

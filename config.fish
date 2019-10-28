@@ -40,4 +40,11 @@ function tmux
   end
 end
 
+function op
+  if not command op list items > /dev/null 2>&1
+    eval (command op signin my)
+  end
+
+  command op $argv
+end
 eval (starship init fish)

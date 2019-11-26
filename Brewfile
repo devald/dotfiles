@@ -1,5 +1,6 @@
 tap "homebrew/cask"
 tap "homebrew/cask-fonts"
+brew "aws-iam-authenticator"
 brew "awscli"
 brew "bash"
 brew "bat"

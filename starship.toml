@@ -2,13 +2,18 @@ prompt_order = [
   "directory",
   "git_branch",
   "git_status",
+  "aws",
   "line_break",
   "jobs",
   "character",
 ]
 
 [directory]
-truncation_length = 8
+fish_style_pwd_dir_length = 1
 
 [git_branch]
-symbol = ""
+symbol = "\uF418 "
+
+[aws]
+symbol = "\uF270 "
+displayed_items = "profile"

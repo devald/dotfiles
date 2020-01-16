@@ -26,6 +26,7 @@ Plug 'roxma/vim-tmux-clipboard'
 Plug 'vim-scripts/BufOnly.vim'
 Plug 'ayu-theme/ayu-vim'
 Plug 'sonph/onehalf', { 'rtp': 'vim' }
+Plug 'gruvbox-community/gruvbox'
 call plug#end()
 
 """"""""""""""""""""""
@@ -53,10 +54,13 @@ set pumheight=10                " Completion window max size
 set colorcolumn=81              " show 80 columns limit
 set cursorline                  " Highlight cursor
 set lazyredraw                  " Wait to redraw
-set clipboard=unnamed           " Accessing the system clipboard from Vim
+set clipboard+=unnamedplus      " Accessing the system clipboard from Vim
 set updatetime=100              " Reduce updatetime for vim-gitgutter
 set shell=/usr/local/bin/fish   " Fish as default shell
 set undofile                    " This enables us to undo files even if you exit Vim.
+
+" Disable line numbers in term
+autocmd TermOpen * setlocal nonumber norelativenumber
 
 " Disable automatic comment insertion
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
@@ -78,10 +82,9 @@ autocmd BufReadPost *
   \ | endif
 
 " Colorscheme
-let ayucolor="mirage"
+let g:gruvbox_italic = 1
 try
-  colorscheme ayu
-  " colorscheme onehalfdark
+  colorscheme gruvbox
 catch /^Vim\%((\a\+)\)\=:E185/
   colorscheme default
 endtry
@@ -125,26 +128,27 @@ nnoremap <silent> <leader>q :q!<CR>
 " smarter tab line
 let g:airline#extensions#tabline#enabled=1
 " powerline fonts
-let g:airline_powerline_fonts=0
-" theme
-let g:airline_theme='ayu_mirage'
+let g:airline_powerline_fonts=1
 
 " edkolev/tmuxline.vim
 
 " powerline separators
-let g:tmuxline_powerline_separators=0
+let g:tmuxline_powerline_separators=1
 " custom preset
 let g:tmuxline_preset={
     \ 'a'      : '#S',
     \ 'b'      : '',
     \ 'c'      : '',
     \ 'win'    : '#I',
-    \ 'cwin'   : '#I \uF120',
+    \ 'cwin'   : '#I #F',
     \ 'x'      : '',
     \ 'y'      : '#(dig +short myip.opendns.com @resolver3.opendns.com)',
     \ 'z'      : '\uF662  #(kubectl config current-context)',
     \ 'options': {'status-justify': 'left'}
     \ }
+
+" christoomey/vim-tmux-navigator
+let g:tmux_navigator_disable_when_zoomed = 1
 
 " Yggdroot/indentLine
 

@@ -9,6 +9,7 @@ alias vi   nvim
 alias g    git
 alias bubu "brew update;
             brew upgrade;
+            brew cask upgrade;
             brew cleanup;
             brew doctor"
 

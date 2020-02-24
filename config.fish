@@ -45,3 +45,4 @@ function op
   command op $argv
 end
 eval (starship init fish)
+eval (direnv hook fish)

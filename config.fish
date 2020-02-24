@@ -7,11 +7,7 @@ set -gx FZF_DEFAULT_COMMAND 'rg --files --hidden --glob "!.git/*"'
 alias v    nvim
 alias vi   nvim
 alias g    git
-alias bubu "brew update;
-            brew upgrade;
-            brew cask upgrade;
-            brew cleanup;
-            brew doctor"
+alias bubu "brew update; and brew upgrade; and brew cask upgrade; and brew cleanup; and brew doctor"
 
 function exit
   if test -n "$VIM"

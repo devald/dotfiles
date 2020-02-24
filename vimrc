@@ -294,11 +294,6 @@ let g:startify_lists = [
   \ { 'type': 'commands',  'header': ['   Commands']  },
   \ ]
 
-" airblade/vim-gitgutter
-
-" disable focus reports
-let g:gitgutter_terminal_reports_focus = 0
-
 " junegunn/fzf.vim
 
 " CtrlP key binding

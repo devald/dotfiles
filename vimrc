@@ -27,11 +27,17 @@ Plug 'vim-scripts/BufOnly.vim'
 Plug 'ayu-theme/ayu-vim'
 Plug 'sonph/onehalf', { 'rtp': 'vim' }
 Plug 'gruvbox-community/gruvbox'
+Plug 'chriskempson/base16-vim'
 call plug#end()
 
 """"""""""""""""""""""
 "      Settings      "
 """"""""""""""""""""""
+
+if filereadable(expand("~/.vimrc_background"))
+  let base16colorspace=256
+  source ~/.vimrc_background
+endif
 
 retab                           " Change all existing tab characters to spaces
 set expandtab                   " Converting tabs to spaces

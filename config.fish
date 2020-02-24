@@ -44,5 +44,12 @@ function op
 
   command op $argv
 end
+
+if status --is-interactive
+  set BASE16_SHELL "$HOME/.config/base16-shell/"
+  source "$BASE16_SHELL/profile_helper.fish"
+  base16-dracula
+end
+
 eval (starship init fish)
 eval (direnv hook fish)

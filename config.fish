@@ -3,13 +3,17 @@ set -gx GOPATH (go env GOPATH)
 set -gx LC_ALL en_US.UTF-8
 set -gx LANG en_US.UTF-8
 set -gx FZF_DEFAULT_COMMAND 'rg --files --hidden --glob "!.git/*"'
+set -gx BAT_THEME base16
 
 alias v    nvim
 alias vi   nvim
 alias g    git
+alias cat  bat
 alias bubu "brew update; and brew upgrade; and brew cask upgrade; and brew cleanup; and brew doctor"
 
-function exit
+bind \cd "exit"
+
+function exit -d "Detach from the last tmux session or exit"
   if test -n "$VIM"
     builtin exit
     return
@@ -29,7 +33,7 @@ function exit
   end
 end
 
-function tmux
+function tmux -d "Attach or start a new tmux session"
   if test -z $argv[1]
     command tmux attach-session -t "$USER" || tmux new -s "$USER"
   else

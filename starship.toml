@@ -12,8 +12,8 @@ prompt_order = [
 fish_style_pwd_dir_length = 1
 
 [git_branch]
-symbol = "\uF418 "
+symbol = ""
 
 [aws]
-symbol = "\uF270 "
+symbol = ""
 displayed_items = "profile"

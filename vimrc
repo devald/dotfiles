@@ -24,9 +24,6 @@ Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 Plug 'mhinz/vim-startify'
 Plug 'roxma/vim-tmux-clipboard'
 Plug 'vim-scripts/BufOnly.vim'
-Plug 'ayu-theme/ayu-vim'
-Plug 'sonph/onehalf', { 'rtp': 'vim' }
-Plug 'gruvbox-community/gruvbox'
 Plug 'chriskempson/base16-vim'
 call plug#end()
 
@@ -34,6 +31,7 @@ call plug#end()
 "      Settings      "
 """"""""""""""""""""""
 
+" Colorscheme
 if filereadable(expand("~/.vimrc_background"))
   let base16colorspace=256
   source ~/.vimrc_background
@@ -57,7 +55,7 @@ set noshowmode                  " We show the mode with airline or lightline
 set ignorecase                  " Search case insensitive...
 set smartcase                   " ... but not it begins with upper case
 set pumheight=10                " Completion window max size
-set colorcolumn=81              " show 80 columns limit
+" set colorcolumn=81              " show 80 columns limit
 set cursorline                  " Highlight cursor
 set lazyredraw                  " Wait to redraw
 set clipboard+=unnamedplus      " Accessing the system clipboard from Vim
@@ -86,14 +84,6 @@ autocmd BufReadPost *
   \ if line("'\"") >= 1 && line("'\"") <= line("$") && &ft !~# 'commit'
   \ |   exe "normal! g`\""
   \ | endif
-
-" Colorscheme
-let g:gruvbox_italic = 1
-try
-  colorscheme gruvbox
-catch /^Vim\%((\a\+)\)\=:E185/
-  colorscheme default
-endtry
 
 """"""""""""""""""""""
 "      Mappings      "
@@ -134,12 +124,12 @@ nnoremap <silent> <leader>q :q!<CR>
 " smarter tab line
 let g:airline#extensions#tabline#enabled=1
 " powerline fonts
-let g:airline_powerline_fonts=1
+let g:airline_powerline_fonts=0
 
 " edkolev/tmuxline.vim
 
 " powerline separators
-let g:tmuxline_powerline_separators=1
+let g:tmuxline_powerline_separators=0
 " custom preset
 let g:tmuxline_preset={
     \ 'a'      : '#S',
@@ -149,7 +139,7 @@ let g:tmuxline_preset={
     \ 'cwin'   : '#I #F',
     \ 'x'      : '',
     \ 'y'      : '#(dig +short myip.opendns.com @resolver3.opendns.com)',
-    \ 'z'      : '\uF662  #(kubectl config current-context)',
+    \ 'z'      : '#(kubectl config current-context)',
     \ 'options': {'status-justify': 'left'}
     \ }
 
@@ -266,9 +256,9 @@ let g:user_emmet_leader_key='<C-e>'
 " mhinz/vim-startify
 
 " show vim-devicons
-function! StartifyEntryFormat()
-  return 'WebDevIconsGetFileTypeSymbol(absolute_path) ." ". entry_path'
-endfunction
+" function! StartifyEntryFormat()
+"   return 'WebDevIconsGetFileTypeSymbol(absolute_path) ." ". entry_path'
+" endfunction
 " bookmark vim, tmux, fish configs
 let g:startify_bookmarks = [
   \ {'c': '~/git/Private/dotfiles/vimrc'}
@@ -305,5 +295,5 @@ let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
 " search with preview
 command! -bang -nargs=* Rg
   \ call fzf#vim#grep(
-  \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
+  \   'rg --column --line-number --no-heading --color=always --smart-case --hidden --glob "!.git/*" '.shellescape(<q-args>), 1,
   \   fzf#vim#with_preview(), <bang>0)

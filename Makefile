@@ -13,6 +13,7 @@ install: terminfo
 	[ -f ~/.gitconfig ] || ln -s $(PWD)/gitconfig ~/.gitconfig
 	[ -f ~/.local/share/nvim/site/autoload/plug.vim ] || curl -fLo ~/.local/share/nvim/site/autoload/plug.vim \
 		--create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+	[ -f ~/.config/base16-shell/profile_helper.fish ] || git clone https://github.com/chriskempson/base16-shell.git ~/.config/base16-shell
 
 	pip3 install --upgrade pynvim
 	nvim +PlugInstall +q +q
@@ -27,6 +28,7 @@ clean:
 	rm -f ~/.config/nvim/coc-settings.json
 	rm -f ~/.gitconfig
 	rm -f ~/.local/share/nvim/site/autoload/plug.vim
+	rm -rf ~/.config/base16-shell
 	rm -rf ~/.terminfo
 
 terminfo:

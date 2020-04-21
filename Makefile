@@ -15,7 +15,7 @@ install: terminfo
 		--create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 	[ -f ~/.config/base16-shell/profile_helper.fish ] || git clone https://github.com/chriskempson/base16-shell.git ~/.config/base16-shell
 
-	pip3 install --upgrade pynvim
+	pip3 install pynvim --no-cache-dir
 	nvim +PlugInstall +q +q
 
 clean:
@@ -24,22 +24,18 @@ clean:
 	rm -f ~/.config/fish/config.fish
 	rm -f ~/.config/starship.toml
 	rm -f ~/.tmux.conf
-	rm -f ~/.config/nvim/init.vim
-	rm -f ~/.config/nvim/coc-settings.json
 	rm -f ~/.gitconfig
-	rm -f ~/.local/share/nvim/site/autoload/plug.vim
+	rm -f ~/.local/share/nvim/site/autoload/plug.vim*
+	rm -rf ~/.config/nvim
 	rm -rf ~/.config/base16-shell
 	rm -rf ~/.terminfo
 
+	pip3 uninstall -y pynvim
+
 terminfo:
 
-	curl -LO https://invisible-island.net/datafiles/current/terminfo.src.gz
-	gunzip terminfo.src.gz
-	tic -xe tmux-256color terminfo.src
-	rm -f terminfo.src
+	infocmp tmux-256color > /dev/null 2>&1 || (curl -LO https://invisible-island.net/datafiles/current/terminfo.src.gz; gunzip terminfo.src.gz; tic -xe tmux-256color terminfo.src; rm -f terminfo.src)
 
-	curl -LO https://raw.githubusercontent.com/jwilm/alacritty/master/extra/alacritty.info
-	tic -xe alacritty,alacritty-direct alacritty.info
-	rm -f alacritty.info
+	infocmp alacritty > /dev/null 2>&1 || (curl -LO https://raw.githubusercontent.com/jwilm/alacritty/master/extra/alacritty.info; tic -xe alacritty,alacritty-direct alacritty.info; rm -f alacritty.info)
 
 .PHONY: all clean install

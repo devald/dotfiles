@@ -19,7 +19,6 @@ Plug 'hashivim/vim-terraform'
 Plug 'mattn/emmet-vim'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'sheerun/vim-polyglot'
-Plug 'ryanoasis/vim-devicons'
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 Plug 'mhinz/vim-startify'
 Plug 'roxma/vim-tmux-clipboard'
@@ -255,10 +254,6 @@ let g:user_emmet_leader_key='<C-e>'
 
 " mhinz/vim-startify
 
-" show vim-devicons
-" function! StartifyEntryFormat()
-"   return 'WebDevIconsGetFileTypeSymbol(absolute_path) ." ". entry_path'
-" endfunction
 " bookmark vim, tmux, fish configs
 let g:startify_bookmarks = [
   \ {'c': '~/git/Private/dotfiles/vimrc'}

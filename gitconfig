@@ -9,3 +9,9 @@
   lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
 [push]
   default = current
+[pull]
+  rebase = true
+[includeIf "gitdir:~/git/github/"]
+  path = .gitconfig.github
+[includeIf "gitdir:~/git/work/"]
+  path = .gitconfig.work

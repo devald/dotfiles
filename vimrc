@@ -1,31 +1,34 @@
 call plug#begin()
-Plug 'scrooloose/nerdtree'
+Plug 'Yggdroot/indentLine'
+Plug 'airblade/vim-gitgutter'
+Plug 'chriskempson/base16-vim'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'edkolev/tmuxline.vim'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'hashivim/vim-terraform'
+Plug 'jiangmiao/auto-pairs'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug 'mattn/emmet-vim'
+Plug 'mg979/vim-visual-multi', { 'branch': 'master' }
+Plug 'mhinz/vim-startify'
+Plug 'neoclide/coc.nvim', { 'branch': 'release' }
+Plug 'ntpeters/vim-better-whitespace'
+Plug 'roxma/vim-tmux-clipboard'
+Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-surround'
-Plug 'airblade/vim-gitgutter'
-Plug 'junegunn/fzf', { 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
-Plug 'ntpeters/vim-better-whitespace'
+Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-vinegar'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'edkolev/tmuxline.vim'
-Plug 'christoomey/vim-tmux-navigator'
-Plug 'Yggdroot/indentLine'
-Plug 'terryma/vim-multiple-cursors'
-Plug 'jiangmiao/auto-pairs'
-Plug 'hashivim/vim-terraform'
-Plug 'mattn/emmet-vim'
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-Plug 'sheerun/vim-polyglot'
-Plug 'neoclide/coc.nvim', { 'branch': 'release' }
-Plug 'mhinz/vim-startify'
-Plug 'roxma/vim-tmux-clipboard'
 Plug 'vim-scripts/BufOnly.vim'
-Plug 'chriskempson/base16-vim'
+Plug 'stsewd/fzf-checkout.vim'
 call plug#end()
-
 """"""""""""""""""""""
 "      Settings      "
 """"""""""""""""""""""
@@ -43,18 +46,17 @@ set shiftwidth=2                " Indent 2 columns in normal or visual mode
 set listchars=tab:▸\ ,eol:¬     " Customise invisible characters
 set scrolloff=10                " Five lines visible above and below the cursor
 set mouse=a                     " Scroll with mouse
-set number                      " Show line numbers
+set number relativenumber       " Show line numbers and relative too
 set noswapfile                  " Don't use swapfile
 set splitright                  " Vertical windows should be split to right
 set splitbelow                  " Horizontal windows should split to bottom
 set autowrite                   " Automatically save before :next, :make etc.
 set hidden                      " Buffer should still exist if window is closed
-set fileformats=unix,dos,mac    " Prefer Unix over Windows over OS 9 formats
 set noshowmode                  " We show the mode with airline or lightline
 set ignorecase                  " Search case insensitive...
 set smartcase                   " ... but not it begins with upper case
 set pumheight=10                " Completion window max size
-" set colorcolumn=81              " show 80 columns limit
+set colorcolumn=81              " show 80 columns limit
 set cursorline                  " Highlight cursor
 set lazyredraw                  " Wait to redraw
 set clipboard+=unnamedplus      " Accessing the system clipboard from Vim
@@ -124,6 +126,9 @@ nnoremap <silent> <leader>q :q!<CR>
 let g:airline#extensions#tabline#enabled=1
 " powerline fonts
 let g:airline_powerline_fonts=0
+" enable tmuxline integration
+let g:airline#extensions#tmuxline#enabled = 1
+let airline#extensions#tmuxline#snapshot_file = "~/.tmux-statusline-colors.conf"
 
 " edkolev/tmuxline.vim
 
@@ -137,9 +142,9 @@ let g:tmuxline_preset={
     \ 'win'    : '#I',
     \ 'cwin'   : '#I #F',
     \ 'x'      : '',
-    \ 'y'      : '#(dig +short myip.opendns.com @resolver3.opendns.com)',
-    \ 'z'      : '#(kubectl config current-context)',
-    \ 'options': {'status-justify': 'left'}
+    \ 'y'      : '',
+    \ 'z'      : '',
+    \ 'options': {'status-justify': 'centre'}
     \ }
 
 " christoomey/vim-tmux-navigator
@@ -148,20 +153,20 @@ let g:tmux_navigator_disable_when_zoomed = 1
 " Yggdroot/indentLine
 
 let g:indentLine_enabled=1
+let g:indentLine_char_list = ['|', '¦', '┆', '┊']
 
 " hashivim/vim-terraform
 
 let g:terraform_fmt_on_save=1
 let g:terraform_align=1
 let g:terraform_fold_sections=1
-let g:terraform_remap_spacebar=1
 
 " fatih/vim-go
 
 " Jump to next error with up and previous error with down arrow key.
 " Close the quickfix window with <leader>a
-nnoremap <down> :cnext<CR>
-nnoremap <up> :cprevious<CR>
+" nnoremap <down> :cnext<CR>
+" nnoremap <up> :cprevious<CR>
 nnoremap <leader>a :cclose<CR>
 
 let g:go_fmt_command = "goimports"
@@ -169,14 +174,17 @@ let g:go_autodetect_gopath = 1
 let g:go_list_type = "quickfix"
 
 let g:go_highlight_types = 1
-let g:go_highlight_fields = 1
+" let g:go_highlight_fields = 1
 let g:go_highlight_functions = 1
-let g:go_highlight_function_calls = 1
+" let g:go_highlight_function_calls = 1
 let g:go_highlight_operators = 1
-let g:go_highlight_extra_types = 1
-let g:go_highlight_build_constraints = 1
-let g:go_highlight_generate_tags = 1
-let g:go_auto_sameids = 1
+" let g:go_highlight_extra_types = 1
+" let g:go_highlight_build_constraints = 1
+" let g:go_highlight_generate_tags = 1
+" let g:go_auto_sameids = 1
+let g:go_highlight_fields = 1
+
+let g:go_doc_popup_window = 1
 
 " Open :GoDeclsDir with ctrl-g
 nmap <C-g> :GoDeclsDir<CR>
@@ -232,20 +240,20 @@ function! s:build_go_files()
   endif
 endfunction
 
-" scrooloose/nerdtree
+" " scrooloose/nerdtree
 
-" open it
-map <leader>m :NERDTreeToggle<CR>
-" automatically close NerdTree when you open a file
-let NERDTreeQuitOnOpen=1
-" show hidden files
-let NERDTreeShowHidden=1
-" delete buffer without confimation
-let NERDTreeAutoDeleteBuffer=1
-" open on the right side
-let g:NERDTreeWinPos = "right"
-" close vim if the only window left open is a NERDTree
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+" " open it
+" map <leader>m :NERDTreeToggle<CR>
+" " automatically close NerdTree when you open a file
+" let NERDTreeQuitOnOpen=1
+" " show hidden files
+" let NERDTreeShowHidden=1
+" " delete buffer without confimation
+" let NERDTreeAutoDeleteBuffer=1
+" " open on the right side
+" let g:NERDTreeWinPos = "right"
+" " close vim if the only window left open is a NERDTree
+" autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 " mattn/emmet-vim
 
@@ -256,7 +264,7 @@ let g:user_emmet_leader_key='<C-e>'
 
 " bookmark vim, tmux, fish configs
 let g:startify_bookmarks = [
-  \ {'c': '~/git/Private/dotfiles/vimrc'}
+  \ {'c': '~/git/github/dotfiles/vimrc'}
   \ ]
 " unicode characters for fortune header frame
 let g:startify_fortune_use_unicode = 1
@@ -279,16 +287,25 @@ let g:startify_lists = [
   \ { 'type': 'commands',  'header': ['   Commands']  },
   \ ]
 
+" airblade/vim-gitgutter
+
+" disable focus reports
+let g:gitgutter_terminal_reports_focus = 0
+
 " junegunn/fzf.vim
 
+" Reverse layout
+let $FZF_DEFAULT_OPTS = '--reverse'
 " CtrlP key binding
 nmap <C-p> :Files<CR>
 " Buffer key binding
-nmap ; :Buffers<CR>
+nmap <leader>; :Buffers<CR>
 " Starting fzf in a popup window
-let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
+let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.8 } }
 " search with preview
 command! -bang -nargs=* Rg
   \ call fzf#vim#grep(
   \   'rg --column --line-number --no-heading --color=always --smart-case --hidden --glob "!.git/*" '.shellescape(<q-args>), 1,
   \   fzf#vim#with_preview(), <bang>0)
+" Prettier shortcut
+command! -nargs=0 Prettier :CocCommand prettier.formatFile

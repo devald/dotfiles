@@ -1,3 +1,4 @@
+.PHONY: all clean
 all: install
 
 install: terminfo
@@ -20,10 +21,23 @@ install: terminfo
 	[ -f ~/.config/fish/functions/music-dl.fish ]			|| git clone https://github.com/devald/fish-functions.git 		~/.config/fish/functions
 
 	pip3 install pynvim --no-cache-dir
+
 	nvim +PlugInstall +q +q
 	nvim +'CocInstall coc-json coc-yaml coc-prettier' +q +q
 
+terminfo: fonts
+
+	infocmp tmux-256color > /dev/null 2>&1 || (curl -LO https://invisible-island.net/datafiles/current/terminfo.src.gz; gunzip terminfo.src.gz; tic -xe tmux-256color terminfo.src; rm -f terminfo.src)
+	infocmp alacritty 		> /dev/null 2>&1 || (curl -LO https://raw.githubusercontent.com/jwilm/alacritty/master/extra/alacritty.info; tic -xe alacritty,alacritty-direct alacritty.info; rm -f alacritty.info)
+
+fonts:
+
+	rsync --ignore-existing /System/Applications/Utilities/Terminal.app/Contents/Resources/Fonts/SF-Mono-*.otf ~/Library/Fonts
+
 clean:
+
+	rm -f ~/Library/Fonts/SF-Mono-*.otf
+	rm -rf ~/.terminfo
 
 	rm -f ~/.config/alacritty/alacritty.yml
 	rm -f ~/.config/fish/config.fish
@@ -36,13 +50,5 @@ clean:
 	rm -f ~/.local/share/nvim/site/autoload/plug.vim*
 	rm -rf ~/.config/base16-shell
 	rm -rf ~/.config/fish/functions
-	rm -rf ~/.terminfo
 
 	pip3 uninstall -y pynvim
-
-terminfo:
-
-	infocmp tmux-256color > /dev/null 2>&1 || (curl -LO https://invisible-island.net/datafiles/current/terminfo.src.gz; gunzip terminfo.src.gz; tic -xe tmux-256color terminfo.src; rm -f terminfo.src)
-	infocmp alacritty 		> /dev/null 2>&1 || (curl -LO https://raw.githubusercontent.com/jwilm/alacritty/master/extra/alacritty.info; tic -xe alacritty,alacritty-direct alacritty.info; rm -f alacritty.info)
-
-.PHONY: all clean install

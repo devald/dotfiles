@@ -1,11 +1,11 @@
 # dotfiles
 My personal dotfiles
 ## Usage
+### Install brew bundle
 ```
-# install brew dependencies
 $ brew bundle
-# copy dotfiles
+```
+### Copy dotfiles
+```
 $ make
-# set gopath
-$ set -U fish_user_paths $fish_user_paths (go env GOPATH)/bin /usr/local/sbin
 ```

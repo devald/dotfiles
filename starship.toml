@@ -1,0 +1,50 @@
+format = """
+[](#DA627D)\
+$directory\
+[](fg:#DA627D bg:#fccf03)\
+$git_branch\
+$git_status\
+[](fg:#fccf03 bg:#33658A)\
+$time\
+[  ](fg:#33658A)\
+$character
+"""
+
+right_format = """
+[](#fccf03)\
+[K8s](bg:#fccf03 fg:#0e0e8a)\
+[](bg:#fccf03 fg:#33658A)\
+$kubernetes\
+[](#33658A)
+"""
+
+[character]
+success_symbol = "[❯](purple)"
+error_symbol = "[❯](red)"
+vimcmd_symbol = "[❮](green)"
+
+[directory]
+style = "bg:#DA627D fg:#0e0e8a"
+format = "[$path ]($style)"
+truncation_length = 3
+truncation_symbol = "…/"
+
+[git_branch]
+symbol = ""
+style = "bg:#fccf03 fg:#0e0e8a"
+format = '[ $symbol $branch ]($style)'
+
+[git_status]
+style = "bg:#fccf03 fg:#8a0e18"
+format = '[$all_status$ahead_behind ]($style)'
+
+[time]
+disabled = false
+time_format = "%R"
+style = "bg:#33658A"
+format = '[ $time ]($style)'
+
+[kubernetes]
+disabled = false
+format = '[$context( \($namespace\))]($style)'
+style = "bg:#33658A"

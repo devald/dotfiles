@@ -12,10 +12,6 @@ fish_add_path /usr/local/sbin (go env GOPATH)/bin
 alias v    nvim
 alias vi   nvim
 alias g    git
-alias cat  bat
 alias bubu "brew update; and brew upgrade; and brew cleanup; and brew doctor"
 
-if status --is-interactive
-  set BASE16_SHELL "$HOME/.config/base16-shell"
-  source "$BASE16_SHELL/profile_helper.fish"
-end
+starship init fish | source

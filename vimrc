@@ -16,6 +16,7 @@ Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'roxma/vim-tmux-clipboard'
 Plug 'sheerun/vim-polyglot'
+Plug 'stsewd/fzf-checkout.vim'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
@@ -27,18 +28,10 @@ Plug 'tpope/vim-vinegar'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-scripts/BufOnly.vim'
-Plug 'stsewd/fzf-checkout.vim'
 call plug#end()
 """"""""""""""""""""""
 "      Settings      "
 """"""""""""""""""""""
-
-" Colorscheme
-if filereadable(expand("~/.vimrc_background"))
-  let base16colorspace=256
-  source ~/.vimrc_background
-endif
-
 retab                           " Change all existing tab characters to spaces
 set expandtab                   " Converting tabs to spaces
 set tabstop=2                   " Insert 2 spaces for a tab
@@ -76,9 +69,13 @@ let &t_SR = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=2\x7\<Esc>\\"
 let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
 
 " TrueColor
-let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 set termguicolors
+
+" Colorscheme
+if filereadable(expand("~/.vimrc_background"))
+  let base16colorspace=256
+  source ~/.vimrc_background
+endif
 
 " Remember last position in file
 autocmd BufReadPost *
@@ -169,22 +166,22 @@ let g:terraform_fold_sections=1
 " nnoremap <up> :cprevious<CR>
 nnoremap <leader>a :cclose<CR>
 
-let g:go_fmt_command = "goimports"
-let g:go_autodetect_gopath = 1
-let g:go_list_type = "quickfix"
+" let g:go_fmt_command = "goimports"
+" let g:go_autodetect_gopath = 1
+" let g:go_list_type = "quickfix"
 
-let g:go_highlight_types = 1
+" let g:go_highlight_types = 1
 " let g:go_highlight_fields = 1
-let g:go_highlight_functions = 1
+" let g:go_highlight_functions = 1
 " let g:go_highlight_function_calls = 1
-let g:go_highlight_operators = 1
+" let g:go_highlight_operators = 1
 " let g:go_highlight_extra_types = 1
 " let g:go_highlight_build_constraints = 1
 " let g:go_highlight_generate_tags = 1
 " let g:go_auto_sameids = 1
-let g:go_highlight_fields = 1
+" let g:go_highlight_fields = 1
 
-let g:go_doc_popup_window = 1
+" let g:go_doc_popup_window = 1
 
 " Open :GoDeclsDir with ctrl-g
 nmap <C-g> :GoDeclsDir<CR>

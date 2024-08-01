@@ -2,10 +2,19 @@
 My personal dotfiles
 ## Usage
 ### Install brew bundle
+#### Home related stuff
+```shell
+brew bundle --no-lock --file homebrew/home
 ```
-$ brew bundle
+#### Work related stuff
+```shell
+brew bundle --no-lock --file homebrew/work
 ```
-### Copy dotfiles
+### Manage dotfiles with Home Manager
+```shell
+home-manager switch --flake .
 ```
-$ make
+### Manage NixOS with flake
+```shell
+sudo nixos-rebuild switch --flake .
 ```

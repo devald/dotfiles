@@ -23,11 +23,11 @@
           inherit pkgs;
           modules = [ ./home.nix ];
         };
-      };
-      macbook = home-manager.lib.homeManagerConfiguration {
-        # inherit pkgs;
-        pkgs = nixpkgs.legacyPackages.aarch64-darwin;
-        modules = [ ./darwin.nix ];
+        macbook = home-manager.lib.homeManagerConfiguration {
+          # inherit pkgs;
+          pkgs = nixpkgs.legacyPackages.aarch64-darwin;
+          modules = [ ./darwin.nix ];
+        };
       };
     };
 }

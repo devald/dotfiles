@@ -11,11 +11,11 @@
         lg = "log --graph --all --decorate --oneline";
         st = "status";
       };
+      userName = "Dévald Tari";
       extraConfig = {
         init.defaultBranch = "main";
         pull.rebase = true;
         push.default = "current";
-        user.name = "Dévald Tari";
       };
       includes = [
         {
@@ -24,7 +24,7 @@
         }
         {
           condition = "gitdir:~/git/work/";
-          contents.user.email = "devald.tari@iu.org";
+          contents.user.email = "devald.tari@example.com";
         }
       ];
     };

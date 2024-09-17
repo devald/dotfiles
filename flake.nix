@@ -1,8 +1,8 @@
 {
-  description = "Devald NixOS flake";
+  description = "Dévald NixOS flake";
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    home-manager.url = "github:nix-community/home-manager/master";
+    home-manager.url = "github:nix-community/Brewfile-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
@@ -16,6 +16,10 @@
         nixos = nixpkgs.lib.nixosSystem {
           inherit system;
           modules = [ ./configuration.nix ];
+        };
+        zfsIso = nixpkgs.lib.nixosSystem {
+          inherit system;
+          modules = [ ./usb-stick.nix ];
         };
       };
       homeConfigurations = {

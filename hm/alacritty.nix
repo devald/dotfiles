@@ -2,9 +2,6 @@
 
 {
   programs = {
-    starship = {
-      enable = true;
-    };
     alacritty = {
       enable = true;
       settings = {

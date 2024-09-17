@@ -2,13 +2,9 @@
 My personal dotfiles
 ## Usage
 ### Install brew bundle
-#### Home related stuff
+#### Homebrew related stuff
 ```shell
-brew bundle --no-lock --file homebrew/home
-```
-#### Work related stuff
-```shell
-brew bundle --no-lock --file homebrew/work
+brew bundle --no-lock --file homebrew/Brewfile
 ```
 ### Manage dotfiles with Home Manager
 ```shell

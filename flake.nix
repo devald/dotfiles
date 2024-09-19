@@ -13,24 +13,23 @@
     in
     {
       nixosConfigurations = {
-        nixos = nixpkgs.lib.nixosSystem {
+        thinkpad-x13 = nixpkgs.lib.nixosSystem {
           inherit system;
-          modules = [ ./configuration.nix ];
+          modules = [ ./hosts/thinkpad-x13/configuration.nix ];
         };
-        zfsIso = nixpkgs.lib.nixosSystem {
+        minipc = nixpkgs.lib.nixosSystem {
           inherit system;
-          modules = [ ./usb-stick.nix ];
+          modules = [ ./hosts/minipc/configuration.nix ];
+        };
+        usb-stick = nixpkgs.lib.nixosSystem {
+          inherit system;
+          modules = [ ./hosts/usb-stick/configuration.nix ];
         };
       };
       homeConfigurations = {
         devald = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
-          modules = [ ./home.nix ];
-        };
-        macbook = home-manager.lib.homeManagerConfiguration {
-          # inherit pkgs;
-          pkgs = nixpkgs.legacyPackages.aarch64-darwin;
-          modules = [ ./darwin.nix ];
+          modules = [ ./home-manager/home.nix ];
         };
       };
     };

@@ -2,10 +2,10 @@
 
 {
   imports = [
-    ./hm/git.nix
-    ./hm/sh.nix
-    ./hm/alacritty.nix
-    ./hm/tmux.nix
+    ./git.nix
+    ./sh.nix
+    ./alacritty.nix
+    ./tmux.nix
   ];
   # Home Manager needs a bit of information about you and the paths it should
   # manage.

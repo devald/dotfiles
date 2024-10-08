@@ -12,6 +12,9 @@
   home.username = "devald";
   home.homeDirectory = "/home/devald";
 
+  # Allow unfree packages.
+  nixpkgs.config.allowUnfree = true;
+
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
   # introduces backwards incompatible changes.
@@ -27,8 +30,18 @@
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
     # pkgs.hello
-    jetbrains.idea-community-bin
+    brave
+    chromium
+    clojure
+    discord
     fira-code-nerdfont
+    google-chrome
+    jetbrains.idea-community-bin
+    slack
+    spotify
+    telegram-desktop
+    temurin-bin-21
+    thunderbird
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the

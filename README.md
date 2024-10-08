@@ -14,3 +14,9 @@ home-manager switch --flake .
 ```shell
 sudo nixos-rebuild switch --flake .
 ```
+
+### Build a custom bootable NixOS USB installer
+
+```shell
+nix build .#nixosConfigurations.usb-stick.config.system.build.isoImage
+```

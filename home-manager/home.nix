@@ -2,6 +2,7 @@
 
 {
   imports = [
+    ./alacritty.nix
     ./git.nix
     ./sh.nix
     ./alacritty.nix

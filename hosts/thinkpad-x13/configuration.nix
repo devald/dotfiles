@@ -12,7 +12,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   # Use latest ZFS compatible kernel.
-  boot.kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
+  boot.kernelPackages = pkgs.linuxPackages_6_10;
 
   # Set the machine hostname.
   networking.hostName = "thinkpad-x13";
@@ -68,7 +68,7 @@
   users.users.devald = {
     isNormalUser = true;
     description = "Dévald Tari";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "libvirtd" ];
     shell = pkgs.zsh;
     packages = with pkgs; [
       # thunderbird
@@ -93,6 +93,10 @@
 
   # Install zsh system-wide.
   programs.zsh.enable = true;
+
+  # Virtualisation
+  virtualisation.libvirtd.enable = true;
+  programs.virt-manager.enable = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget

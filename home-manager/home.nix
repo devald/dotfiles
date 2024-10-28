@@ -43,6 +43,7 @@
     telegram-desktop
     temurin-bin-21
     thunderbird
+    libreoffice-qt6-fresh
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the

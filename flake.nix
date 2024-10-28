@@ -21,9 +21,9 @@
           inherit system;
           modules = [ ./hosts/minipc/configuration.nix ];
         };
-        usb-stick = nixpkgs.lib.nixosSystem {
+        usb-installer = nixpkgs.lib.nixosSystem {
           inherit system;
-          modules = [ ./hosts/usb-stick/configuration.nix ];
+          modules = [ ./hosts/usb-installer/configuration.nix ];
         };
       };
       homeConfigurations = {

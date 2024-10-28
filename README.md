@@ -18,5 +18,5 @@ sudo nixos-rebuild switch --flake .
 ### Build a custom bootable NixOS USB installer
 
 ```shell
-nix build .#nixosConfigurations.usb-stick.config.system.build.isoImage
+nix build .#nixosConfigurations.usb-installer.config.system.build.isoImage
 ```

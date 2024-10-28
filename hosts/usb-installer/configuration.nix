@@ -6,7 +6,7 @@
 
   nixpkgs.hostPlatform = "x86_64-linux";
 
-  boot.kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
+  boot.kernelPackages = pkgs.linuxPackages_6_10;
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
@@ -14,4 +14,6 @@
     git
     gptfdisk
   ];
+
+  users.users.root.openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDwNqKDD/jk/K6kvdCJ8SaRVpHUMIyXo8TyVzYuQDj6O" ];
 }

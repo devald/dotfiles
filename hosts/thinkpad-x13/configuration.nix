@@ -90,6 +90,7 @@
 
   # Install 1Password.
   programs._1password-gui.enable = true;
+  programs._1password-gui.polkitPolicyOwners = [ "devald" ];
 
   # Install zsh system-wide.
   programs.zsh.enable = true;

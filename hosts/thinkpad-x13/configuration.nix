@@ -11,8 +11,8 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  # Use latest ZFS compatible kernel.
-  boot.kernelPackages = pkgs.linuxPackages_6_10;
+  # Use the latest LTS kernel.
+  boot.kernelPackages = pkgs.linuxPackages_latest;
 
   # Set the machine hostname.
   networking.hostName = "thinkpad-x13";

@@ -6,8 +6,6 @@
 
   nixpkgs.hostPlatform = "x86_64-linux";
 
-  boot.kernelPackages = pkgs.linuxPackages_6_10;
-
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   environment.systemPackages = with pkgs; [

@@ -7,6 +7,7 @@
     ./sh.nix
     ./ssh.nix
     ./tmux.nix
+    ./emacs.nix
   ];
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
@@ -31,19 +32,22 @@
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
     # pkgs.hello
-    brave
-    chromium
     clojure
     discord
-    fira-code-nerdfont
     google-chrome
     jetbrains.idea-community-bin
+    kdePackages.yakuake
+    libreoffice-qt6-fresh
+    openra
     slack
     spotify
     telegram-desktop
     temurin-bin-21
     thunderbird
-    libreoffice-qt6-fresh
+    nil
+    nixfmt-rfc-style
+    terraform
+    terraform-ls
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
